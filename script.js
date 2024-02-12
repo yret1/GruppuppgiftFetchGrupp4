@@ -1,3 +1,4 @@
+
 //Api query:
 
 const searchFunction = () => {
@@ -15,7 +16,6 @@ const secret = "76aedade9fbbc0e8";
 
 
 
-
 const media = "photos";
 
 //
@@ -24,6 +24,13 @@ const media = "photos";
 const imageContainer = document.querySelector(".search__display");
 const imgSearchBtn = document.querySelector(".search__submit");
 let searchInput = document.querySelector(".search__input");
+let pagecounter = document.querySelector(".pagecount");
+const nextButton = document.querySelector(".next");
+const prevButton = document.querySelector(".prev");
+
+
+
+
 
 
 imgSearchBtn.addEventListener("click", searchFunction);
@@ -35,12 +42,14 @@ document.addEventListener("keydown", (event) => {
 
 let photoArray = [];
 
+let totalPages = 20;
+let currentPage = 1;
+
 const fetchData = async () => {
-  fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${API_KEY}&secret=${secret}&tags=${searchValue||"dog"}&media=${media}&safe_search=2&per_page=10&page=1&format=json&nojsoncallback=1`)
+  fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${API_KEY}&secret=${secret}&tags=${searchValue||"dog"}&media=${media}&safe_search=2&per_page=20&page=${currentPage}&format=json&nojsoncallback=1`)
     .then((response) => response.json())
 
     .then((data) => {
-      console.log(data)
         photoArray = [];
       data.photos.photo.forEach((item) => {
         photoArray.push(
@@ -53,8 +62,63 @@ const fetchData = async () => {
 
     .then(() => photoRender())
 
+    .then(() => lightBox())
+
     .catch((error) => console.log(error));
 };
+
+
+
+const lightBox = () => {
+
+  let images = document.querySelectorAll(".imgWrapper");
+
+  const lightboxClose = document.querySelector(".lightbox__close");
+
+  lightboxClose.addEventListener("click", closeLightbox);
+
+  images.forEach((image) => {
+    image.addEventListener("click", () => {
+      let light_Box = document.querySelector(".display__lightbox");
+      let img_Lightbox = document.querySelector(".lightbox__img");
+      light_Box.style.display = "flex";
+      img_Lightbox.src = image.firstChild.src; 
+    })
+  })
+}
+
+
+const closeLightbox = () => {
+    let light_Box = document.querySelector(".display__lightbox");
+    let img_Lightbox = document.querySelector(".lightbox__img");
+    light_Box.style.display = "none";
+    img_Lightbox.src = " ";
+}
+
+
+
+const nextPage = () => {
+  if (currentPage >= 20) {
+    currentPage = 1
+    fetchData()
+  }else {
+    currentPage += 1;
+    fetchData()
+  }
+
+}
+
+const prevPage = () => {
+
+  if(currentPage == 1) {
+    currentPage = 20;
+    fetchData()
+  }else {
+    currentPage -= 1;
+    fetchData()
+  }
+
+}
 
 
 const clearImgs = () => {
@@ -64,6 +128,7 @@ const clearImgs = () => {
 }
 
 const photoRender = () => {
+  pagecounter.innerHTML = `Page ${currentPage} of ${totalPages}`
   photoArray.forEach((photoUrl, index) => {
     const imgWrapper = document.createElement("div");
     imgWrapper.classList.add("imgWrapper");
@@ -74,5 +139,9 @@ const photoRender = () => {
     imageContainer.appendChild(imgWrapper);
   });
 };
+
+
+nextButton.addEventListener("click", nextPage);
+prevButton.addEventListener("click", prevPage);
 
 fetchData();

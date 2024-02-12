@@ -59,13 +59,76 @@
     gap: 10px;
     margin: 30px 0 30px 0;
     padding: 30px;
+    position: relative;
 }
 
-.search__display img {
+.img {
     object-fit: contain;
     width: 100%;
     height: 100%;
-    margin-bottom: 10px;
     cursor: pointer;
+    margin-bottom: 10px;
 }
 
+
+
+.imgWrapper:hover{
+    cursor: pointer;
+    scale: 1.05;
+
+}
+
+.display__lightbox {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    backdrop-filter: blur(5px) ;
+    z-index: 20;
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+.lightbox__img {
+
+    max-width: 70%;
+    max-height: 80%;
+
+    box-shadow: 0 0 30px black;
+}
+
+
+.lightbox__close {
+    position: absolute;
+    color: white;
+    cursor: pointer;
+
+    font-size: 40px;
+    top: 25px;
+    right: 40px;
+
+    text-shadow: 0 0 10px black;
+}
+
+.controll__buttons {
+    display: flex;
+    gap: 40px;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+}
+
+.controll__buttons button {
+    width: 120px;
+    height: 30px;
+}
+
+.pagecount {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
