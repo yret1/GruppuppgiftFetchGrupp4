@@ -46,7 +46,7 @@ let totalPages = 20;
 let currentPage = 1;
 
 const fetchData = async () => {
-  fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${API_KEY}&secret=${secret}&tags=${searchValue}&media=${media}&safe_search=2&per_page=20&page=${currentPage}&format=json&nojsoncallback=1`)
+  fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${API_KEY}&sort=date-taken-asc&tags=${searchValue}&media=${media}&safe_search=1&per_page=20&privacy_filter=1&page=${currentPage}&content_types=1&format=json&nojsoncallback=1`)
     .then((response) => response.json())
 
     .then((data) => {
