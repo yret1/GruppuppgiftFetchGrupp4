@@ -17,6 +17,7 @@ const secret = "76aedade9fbbc0e8";
 
 
 const media = "photos";
+const thing = "thing"
 
 //
 
