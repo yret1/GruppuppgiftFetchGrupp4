@@ -23,9 +23,10 @@ body {
 }
 
 .search__title {
-    font-size: 2rem;
+    font-size: 4.5rem;
     color: #fff;
     text-shadow: 1px 1px 1px #000;
+    font-family: "Poiret One", sans-serif;
 }
 
 .search__container {
@@ -42,7 +43,7 @@ body {
     background-color: rgba(190, 189, 189, 0.5);
     color: #fff;
     padding: 10px;
-    font-size: 1rem
+    font-size: 1rem;
 }
 
 .search__submit {
