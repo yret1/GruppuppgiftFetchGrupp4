@@ -10,7 +10,7 @@ const searchFunction = () => {
   fetchData();
 }
 
-let searchValue;
+let searchValue = "cats";
 const API_KEY = "687ed96588d723d61f7a8b89012440c0";
 const secret = "76aedade9fbbc0e8";
 
@@ -46,7 +46,7 @@ let totalPages = 20;
 let currentPage = 1;
 
 const fetchData = async () => {
-  fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${API_KEY}&secret=${secret}&tags=${searchValue||"dog"}&media=${media}&safe_search=2&per_page=20&page=${currentPage}&format=json&nojsoncallback=1`)
+  fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${API_KEY}&secret=${secret}&tags=${searchValue}&media=${media}&safe_search=2&per_page=20&page=${currentPage}&format=json&nojsoncallback=1`)
     .then((response) => response.json())
 
     .then((data) => {
