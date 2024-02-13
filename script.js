@@ -29,9 +29,16 @@ const nextButton = document.querySelector(".next");
 const prevButton = document.querySelector(".prev");
 
 
-
-
-
+// Felhantering, sökordet finns inte.
+function searchNotFound() {
+  const errorText = document.createElement("h2");
+  errorText.classList.add("errorText");
+  errorText.innerHTML = "Hoppsan.. Ditt sökresultat fanns inte denna gång :(";
+  imageContainer.style.display = "flex";
+  errorText.style.position = "relative"
+  errorText.style.margin = "auto";
+  imageContainer.appendChild(errorText);
+}
 
 imgSearchBtn.addEventListener("click", searchFunction);
 document.addEventListener("keydown", (event) => {
@@ -63,8 +70,14 @@ const fetchData = async () => {
     .then(() => photoRender())
 
     .then(() => lightBox())
-
-    .catch((error) => console.log(error));
+    
+    .then(() => {
+      if(photoArray.length === 0)
+      {
+        searchNotFound();
+      } 
+    })
+    .catch((error) => {console.error(error);});
 };
 
 
@@ -122,8 +135,10 @@ const prevPage = () => {
 
 
 const clearImgs = () => {
+  imageContainer.style.display = "";
   while(imageContainer.firstChild){
     imageContainer.removeChild(imageContainer.firstChild);
+  
   }
 }
 
