@@ -29,13 +29,7 @@ const prevButton = document.querySelector(".prev");
 
 
 
-//search trigger
-imgSearchBtn.addEventListener("click", searchFunction);
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Enter") {
-    searchFunction();
-  }
-})
+
 
 //Page Counter and photoarray
 let photoArray = [];
@@ -82,6 +76,15 @@ const searchFunction = () => {
 
   fetchData();
 }
+
+
+//search trigger
+imgSearchBtn.addEventListener("click", searchFunction);
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    searchFunction();
+  }
+})
 
 
 function searchNotFound() {
