@@ -60,8 +60,14 @@ const fetchData = async () => {
     .then(() => photoRender())
 
     .then(() => lightBox())
-
-    .catch((error) => console.log(error));
+    
+    .then(() => {
+      if(photoArray.length === 0)
+      {
+        searchNotFound();
+      } 
+    })
+    .catch((error) => {console.error(error);});
 };
 
 
@@ -74,6 +80,17 @@ const searchFunction = () => {
  console.log(search)
 
   fetchData();
+}
+
+
+function searchNotFound() {
+  const errorText = document.createElement("h2");
+  errorText.classList.add("errorText");
+  errorText.innerHTML = "Hoppsan.. Ditt sökresultat fanns inte denna gång :(";
+  imageContainer.style.display = "flex";
+  errorText.style.position = "relative"
+  errorText.style.margin = "auto";
+  imageContainer.appendChild(errorText);
 }
 
 
@@ -133,8 +150,10 @@ const prevPage = () => {
 
 //Rendering Logic
 const clearImgs = () => {
+  imageContainer.style.display = "";
   while(imageContainer.firstChild){
     imageContainer.removeChild(imageContainer.firstChild);
+  
   }
 }
 
