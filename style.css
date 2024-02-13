@@ -1,8 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Arsenal:ital,wght@0,400;0,700;1,400;1,700&family=Poiret+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poiret+One&family=Quicksand:wght@300..700&display=swap');
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Quicksand", sans-serif;
 }
 
 body {
@@ -62,7 +64,6 @@ body {
     text-shadow: 1px 1px 1px #3d3d3d8f;
     font-size: 1rem;
     cursor: pointer;
-    font-family: "Arsenal", sans-serif;
 }
 
 .search__submit:hover {
@@ -145,7 +146,6 @@ body {
     border-radius: 5px;
     border: 2px solid #92aece ;
     box-shadow: 0 0 1px rgb(69, 69, 69);
-    font-family: "Arsenal", sans-serif;
 }
 
 .button__class:hover {
