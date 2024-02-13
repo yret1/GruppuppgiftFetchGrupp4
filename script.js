@@ -1,21 +1,17 @@
 
 //Api query:
 
-const searchFunction = () => {
-  let search = searchInput.value;
-  searchValue = search;
 
- console.log(search)
-
-  fetchData();
-}
 
 let searchValue = "cats";
 const API_KEY = "687ed96588d723d61f7a8b89012440c0";
 const secret = "76aedade9fbbc0e8";
 
+// Search settings
 
-
+const safe_search = 1;
+const content_type = 1;
+const privacy_filter = 1;
 const media = "photos";
 
 //
@@ -32,7 +28,7 @@ const prevButton = document.querySelector(".prev");
 
 
 
-
+//search trigger
 imgSearchBtn.addEventListener("click", searchFunction);
 document.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
@@ -40,13 +36,14 @@ document.addEventListener("keydown", (event) => {
   }
 })
 
+//Page Counter and photoarray
 let photoArray = [];
-
 let totalPages = 20;
 let currentPage = 1;
 
+//Fetch function with async handling
 const fetchData = async () => {
-  fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${API_KEY}&secret=${secret}&tags=${searchValue}&media=${media}&safe_search=2&per_page=20&page=${currentPage}&format=json&nojsoncallback=1`)
+  fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${API_KEY}&sort=date-taken-asc&tags=${searchValue}&media=${media}&safe_search=${safe_search}&per_page=20&privacy_filter=${privacy_filter}&page=${currentPage}&content_types=${content_type}&format=json&nojsoncallback=1`)
     .then((response) => response.json())
 
     .then((data) => {
@@ -68,6 +65,19 @@ const fetchData = async () => {
 };
 
 
+//Search Function
+
+const searchFunction = () => {
+  let search = searchInput.value;
+  searchValue = search;
+  currentPage = 1;
+ console.log(search)
+
+  fetchData();
+}
+
+
+//Lightbox feature
 
 const lightBox = () => {
 
@@ -96,7 +106,7 @@ const closeLightbox = () => {
 }
 
 
-
+//Page Handling
 const nextPage = () => {
   if (currentPage >= 20) {
     currentPage = 1
@@ -121,6 +131,7 @@ const prevPage = () => {
 }
 
 
+//Rendering Logic
 const clearImgs = () => {
   while(imageContainer.firstChild){
     imageContainer.removeChild(imageContainer.firstChild);
@@ -141,7 +152,10 @@ const photoRender = () => {
 };
 
 
+//Eventlisteners
 nextButton.addEventListener("click", nextPage);
 prevButton.addEventListener("click", prevPage);
 
+
+//On first load image render
 fetchData();
