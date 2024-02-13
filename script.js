@@ -13,6 +13,7 @@ const safe_search = 1;
 const content_type = 1;
 const privacy_filter = 1;
 const media = "photos";
+const thing = "thing"
 
 //
 
